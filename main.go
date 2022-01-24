@@ -23,6 +23,11 @@ var albums = []album{
 
 func main() {
 	router := gin.Default()
+	router.LoadHTMLGlob("templates/*.html")
+	//router.LoadHTMLFiles("templates/template1.html", "templates/template2.html")
+	router.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", gin.H{})
+	})
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
